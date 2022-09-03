@@ -37,7 +37,7 @@
     (let [
         time (/ (.now js/Date) 1000 60)
         minute (mod time 60)
-        hour (- (mod (/ time 60) 12) (/ (.getTimezoneOffset (js/Date.)) 60))
+        hour (+ 12 (mod (/ time 60) 12) (- (/ (.getTimezoneOffset (js/Date.)) 60)))
         startHour (.indexOf hours (Math/floor hour))
         endHour (.indexOf hours (Math/floor (+ hour 1)))]
         (draw-line draw-ctx (- (* Math/PI minute .0333333333) (/ Math/PI 2)) 0.9)
