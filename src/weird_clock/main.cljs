@@ -17,6 +17,8 @@
         (+ (/ draw-height 2) (* (/ draw-height 2) (Math/sin angle) len)))
     (.stroke draw-ctx))
 
+(set! (.-textBaseline draw-ctx) "middle")
+(set! (.-textAlign draw-ctx) "center")
 
 (defn draw-fn [] 
     (set! (.-fillStyle draw-ctx) "rgb(0,255,255)")
@@ -29,8 +31,8 @@
         (when (>= index 0)
             (.fillText draw-ctx
                 (nth hours index)
-                (+ (/ draw-width 2) (* (/ draw-width 2) (Math/cos (/ (* Math/PI index) 6)) 0.9))
-                (+ (/ draw-height 2) (* (/ draw-height 2) (Math/sin (/ (* Math/PI index) 6)) 0.9)))
+                (+ (/ draw-width 2) (* (/ draw-width 2) (Math/cos (/ (* Math/PI index) 6)) 0.8))
+                (+ (/ draw-height 2) (* (/ draw-height 2) (Math/sin (/ (* Math/PI index) 6)) 0.8)))
             (recur (- index 1))))
     (set! (.-fillStyle draw-ctx) "rgb(255,0,0)")
     (set! (.-lineWidth draw-ctx) 6)
@@ -42,7 +44,7 @@
         endHour (.indexOf hours (Math/floor (+ hour 1)))
         startMinute (.indexOf hours (Math/floor (/ minute 5)))
         endMinute (.indexOf hours (Math/floor (+ (/ minute 5) 1)))]
-        (draw-line draw-ctx (* 2 Math/PI (/ (+ startMinute (* (mod (- endMinute startMinute) 12) (/ (mod minute 5) 5))) 12)) 0.9)
-        (draw-line draw-ctx (* 2 Math/PI (/ (+ startHour (* (/ minute 60) (mod (- endHour startHour) 12))) 12)) 0.6)))
+        (draw-line draw-ctx (* 2 Math/PI (/ (+ startMinute (* (mod (- endMinute startMinute) 12) (/ (mod minute 5) 5))) 12)) 0.7)
+        (draw-line draw-ctx (* 2 Math/PI (/ (+ startHour (* (/ minute 60) (mod (- endHour startHour) 12))) 12)) 0.5)))
 
 (js/setInterval draw-fn 1000)
