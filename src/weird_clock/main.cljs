@@ -9,6 +9,8 @@
 (def draw-height (.-height draw-canvas))
 (def draw-ctx (.getContext draw-canvas "2d"))
 
+(def params (js/URLSearchParams. (.-search js/location)))
+
 (defn draw-line [ctx angle len] 
     (.beginPath ctx)
     (.moveTo ctx (/ draw-width 2) (/ draw-height 2))
@@ -16,6 +18,15 @@
         (+ (/ draw-width 2) (* (/ draw-width 2) (Math/cos angle) len))
         (+ (/ draw-height 2) (* (/ draw-height 2) (Math/sin angle) len)))
     (.stroke draw-ctx))
+
+(defn switch-fullscreen []
+    (if (= (.-className draw-canvas) "fullscreen")
+    (set! (.-className draw-canvas) "")
+    (set! (.-className draw-canvas) "fullscreen")))
+
+(.addEventListener draw-canvas "click" switch-fullscreen)
+
+(when (.has params "fullscreen") (switch-fullscreen))
 
 (set! (.-textBaseline draw-ctx) "middle")
 (set! (.-textAlign draw-ctx) "center")
