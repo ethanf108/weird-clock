@@ -1,4 +1,11 @@
+FROM clojure:latest as clojure-build
+WORKDIR /build
+COPY deps.edn .
+COPY src/ src/
+RUN clojure -M -m cljs.main --optimizations advanced -c weird-clock.main
+
 FROM nginx:latest
+WORKDIR /web
+COPY --from=clojure-build /build/out ./out/
+COPY index.html .
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY index.html /web/
-COPY /out/ /web/out/
