@@ -4,7 +4,7 @@ COPY deps.edn .
 COPY src/ src/
 RUN clojure -M -m cljs.main --optimizations advanced -c weird-clock.main
 
-FROM nginx:latest
+FROM galenguyer/nginx
 WORKDIR /web
 COPY --from=clojure-build /build/out ./out/
 COPY index.html .
