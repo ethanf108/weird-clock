@@ -39,7 +39,7 @@
     (let [
         time (/ (.now js/Date) 1000 60)
         minute (mod time 60)
-        hour (+ (mod (/ time 60) 12) (- (/ (.getTimezoneOffset (js/Date.)) 60)))
+        hour (mod (+ (/ time 60) (- (/ (.getTimezoneOffset (js/Date.)) 60))) 12)
         startHour (.indexOf hours (Math/floor hour))
         endHour (.indexOf hours (Math/floor (+ hour 1)))
         startMinute (.indexOf hours (Math/floor (/ minute 5)))
