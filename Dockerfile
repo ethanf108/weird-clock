@@ -2,7 +2,7 @@ FROM clojure:latest as clojure-build
 WORKDIR /build
 COPY deps.edn .
 COPY src/ src/
-RUN clojure -M -m cljs.main --optimizations advanced -c weird-clock.main
+RUN clojure -M -m cljs.main --optimizations none -c weird-clock.main
 
 FROM galenguyer/nginx
 WORKDIR /web
