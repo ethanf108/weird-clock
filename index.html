@@ -7,28 +7,14 @@
           overflow: hidden;
           margin: 0;
       }
-      canvas_ {
+      canvas {
           width: 100vw;
           height: 100vh;
       }
-      .guess {
-        padding: 10vw;
-      }
     </style>
   </head>
-  <body id="body">
-    <canvas id="draw" width="500" height="500"></canvas>
-    <br />
-    <span class="guess">
-      <input id="guess-text" type="time" min="00:00" max="11:59"></input>
-      <button id="guess-button">Guess</button>
-    </span>
+  <body>
+    <canvas id="draw"></canvas>
     <script src="out/main.js" type="text/javascript"></script>
-    <script type="text/javascript" defer>
-      var hint;
-      window.addEventListener("load", function(){
-        hint = weird_clock.main;
-      })
-    </script>
   </body>
 </html>
